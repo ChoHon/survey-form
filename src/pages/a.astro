@@ -1,0 +1,162 @@
+---
+import "../styles/global.css";
+
+import Layout from "../layouts/Layout.astro";
+import QuestionContainer from "../components/question/QuestionContainer.vue";
+import type { contentMap } from "../components/question/interfaces";
+
+const pageIdx = "A";
+const pageTitle = `${pageIdx}. 응답자 인적사항 및 사업체 개요`;
+
+const componentMapList: contentMap[] = [
+  {
+    title: "응답자 정보",
+    name: "respondent",
+    question: [
+      {
+        title: "응답자 성명",
+        name: "name",
+        content: {
+          type: "text" as const,
+          text: "{0}",
+          components: [
+            {
+              name: "",
+              type: "input" as const,
+              style: {
+                width: "20%",
+              },
+            },
+          ],
+        },
+      },
+      {
+        title: "소속부서명",
+        name: "department",
+        content: {
+          type: "text" as const,
+          text: "{0}",
+          components: [
+            {
+              name: "",
+              type: "input" as const,
+              style: {
+                width: "40%",
+              },
+            },
+          ],
+        },
+      },
+      {
+        title: "직위",
+        name: "position",
+        content: {
+          type: "text" as const,
+          text: "{0}",
+          components: [
+            {
+              name: "",
+              type: "input" as const,
+              style: {
+                width: "20%",
+              },
+            },
+          ],
+        },
+      },
+      {
+        title: "전화번호",
+        name: "phone",
+        content: {
+          type: "text" as const,
+          text: "{0}",
+          components: [
+            {
+              name: "",
+              type: "input" as const,
+              style: {
+                width: "20%",
+              },
+            },
+          ],
+        },
+      },
+      {
+        title: "이메일",
+        name: "email",
+        content: {
+          type: "text" as const,
+          text: "{0}",
+          components: [
+            {
+              name: "",
+              type: "input" as const,
+              style: {
+                width: "20%",
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    title: "사업체 정보",
+    name: "company",
+    question: [
+      {
+        title: "사업체명",
+        name: "name",
+        content: {
+          type: "text" as const,
+          text: "{0}",
+          components: [
+            {
+              name: "",
+              type: "input" as const,
+              style: {
+                width: "40%",
+              },
+            },
+          ],
+        },
+      },
+      {
+        title: "주소",
+        name: "address",
+        content: {
+          type: "text" as const,
+          text: "{0}",
+          components: [
+            {
+              name: "",
+              type: "input" as const,
+              style: {
+                width: "100%",
+              },
+            },
+          ],
+        },
+      },
+    ],
+  },
+];
+
+componentMapList.forEach((componentMap: contentMap, idx) => {
+  componentMap.idx = `${pageIdx}${idx + 1}`;
+});
+---
+
+<Layout pageTitle={pageTitle} nextButtonHref="/b" nextButtonType="single">
+  <h1>{pageTitle}</h1>
+
+  <form id="surveyForm">
+    {
+      componentMapList.map((componentMap) => (
+        <div class="intro">
+          <QuestionContainer client:load contentMap={componentMap} />
+        </div>
+      ))
+    }
+  </form>
+</Layout>

@@ -1,11 +1,69 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import "../styles/global.css";
+import Layout from "../layouts/Layout.astro";
+import Table from "../components/index/Table.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+  pageTitle="철도 화물 수요예측방법 개선을 위한 주요 철송품목 운송실태조사"
+  nextButtonLabel="설문 시작"
+  nextButtonHref="/a"
+  nextButtonType="single"
+>
+  <h1>철도 화물 수요예측방법 개선을 위한 주요 철송품목 운송실태조사</h1>
+
+  <div class="intro">
+    <div class="intro-body">
+      안녕하십니까? 저는 서울시립대학교 교통공학과 박동주 교수입니다.
+      <br />
+      저희 서울시립대학교 교통공학과에서는 2024년 국가철도공단에서 발주한 『철도
+      화물 수요예측방법 개선 연구』를 수행하고 있습니다.
+      <br />
+      본 조사는
+      <b
+        >그 일환으로 주요 철송품목(컨테이너, 시멘트, 철강)의 시공간적
+        운송실태와, 운송수단 선택에 있어서 각 사업체가 중요하게 생각하는 사항
+        등을 파악</b
+      >하는 것에 그 목적이 있습니다. <br />
+      <b>최대한 출하 및 운송 업무에 결정권이 있는 임직원</b>께서 응답해주시기
+      바라며, 가능한 한 구체적으로 응답해주시면 고맙겠습니다.
+      <br />
+      본 조사에 기재된 내용은 통계적인 조사목적으로만 사용되며, 기재사항에 대해서는
+      비밀이 철저히 보장됩니다.
+      <br />
+      바쁘신 중에 시간을 할애해 주셔서 감사드리며, 본 조사와 관련된 문의사항은 아래
+      연락처로 문의하시면 성심성의껏 말씀드리겠습니다.<br />
+      <br />
+      <p class="text-center">2026.02</p>
+      <p class="text-right">
+        서울시립대학교 교통공학과<br />교수 박 동 주 배상
+      </p>
+    </div>
+  </div>
+
+  <div class="info-container">
+    <div class="info-image">
+      <img src="images/image.png" class="w-[300px]" alt="설문 안내 이미지" />
+    </div>
+
+    <div class="info-table">
+      <Table />
+    </div>
+  </div>
 </Layout>
+
+<style>
+  @import "tailwindcss";
+
+  .info-container {
+    @apply flex flex-col min-[900px]:flex-row items-start gap-6;
+  }
+
+  .info-image {
+    @apply flex-none w-full justify-items-center min-[900px]:w-[50%] min-[900px]:justify-items-start;
+  }
+
+  .info-table {
+    @apply flex-1 w-full justify-items-center min-[900px]:w-[50%] min-[900px]:justify-items-end;
+  }
+</style>

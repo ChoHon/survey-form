@@ -1,0 +1,39 @@
+@import "tailwindcss";
+
+body {
+  font-family:
+    "Open Sans", arial, "Apple SD Gothic Neo", "Noto Sans CJK KR", "본고딕",
+    "KoPubDotum Medium", "나눔바른고딕", "나눔고딕", "NanumGothic", "맑은고딕",
+    "Malgun Gothic", "sans-serif";
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+h1 {
+  font-size: xx-large;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: large;
+  font-weight: bold;
+}
+
+.intro {
+  padding: 14px;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background: #fafafa;
+  margin-bottom: 18px;
+}
+
+.intro-body {
+  color: #555;
+  line-height: 1.5;
+}

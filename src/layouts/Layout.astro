@@ -1,23 +1,33 @@
-<!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+---
+import Footer from "../components/Footer.astro";
+import ProgressGroup from "../components/common/ProgressGroup.astro";
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+const { pageTitle, ...ProgressProps } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <div class="mx-auto p-4">
+      <div class="layout-container">
+        <slot />
+      </div>
+      <Footer>
+        <ProgressGroup {...ProgressProps} />
+      </Footer>
+    </div>
+
+    <style>
+      @import "tailwindcss";
+
+      .layout-container {
+        @apply w-screen min-[900px]:w-[900px] p-4 overflow-hidden rounded-lg bg-white shadow-sm;
+      }
+    </style>
+  </body>
+</html>

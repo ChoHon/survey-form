@@ -1,0 +1,147 @@
+---
+import "../styles/global.css";
+
+import Layout from "../layouts/Layout.astro";
+import QuestionContainer from "../components/question/QuestionContainer.vue";
+import type { contentMap } from "../components/question/interfaces";
+
+const pageIdx = "B";
+const pageTitle = `${pageIdx}. 사업체별 화물운송실태 조사`;
+
+const componentMapList: contentMap[] = [
+  {
+    title: "다음은 귀사의 사업체 현황 및 규모에 관한 설문입니다.",
+    name: "companySize",
+    question: [
+      {
+        title: "귀사의 종사자수는 어떻게 되십니까?",
+        name: "employeeCount",
+        content: {
+          type: "text" as const,
+          text: "총 {0}명",
+          components: [
+            {
+              name: "",
+              type: "input" as const,
+              style: {
+                width: "20%",
+                align: "right",
+              },
+            },
+          ],
+        },
+      },
+      {
+        title: "귀사의 컨테이너 운송수단 보유현황은 어떻게 되십니까?",
+        name: "containerTransportCount",
+        question: [
+          {
+            title: "① 컨테이너 운송차량",
+            showTitleIdx: false,
+            name: "containerVehicle",
+            content: {
+              type: "text" as const,
+              text: "{0} (직영 {1}, 위수탁(지입) {2} 대)",
+              components: [
+                {
+                  name: "total",
+                  type: "input" as const,
+                  style: {
+                    width: "10%",
+                    align: "right",
+                  },
+                  header: "총",
+                  unit: "대",
+                },
+                {
+                  name: "direct",
+                  type: "input" as const,
+                  style: {
+                    width: "10%",
+                    align: "right",
+                  },
+                  unit: "대",
+                },
+                {
+                  name: "consigned",
+                  type: "calcValue" as const,
+                  style: {},
+                  computed: "{total} - {direct}",
+                },
+              ],
+            },
+          },
+          {
+            title: "② 사유화차",
+            showTitleIdx: false,
+            name: "privateVehicle",
+            content: {
+              type: "text" as const,
+              text: "{0}",
+              components: [
+                {
+                  name: "",
+                  type: "input" as const,
+                  style: {
+                    width: "10%",
+                    align: "right",
+                  },
+                  header: "총",
+                  unit: "대",
+                },
+              ],
+            },
+          },
+        ],
+      },
+      {
+        title: "귀사의 연간 매출액은 어떻게 되십니까?",
+        name: "companyAnnualSales",
+        content: {
+          type: "text" as const,
+          text: "{0} (컨테이너 내륙운송부분 {1})",
+          components: [
+            {
+              name: "total",
+              type: "input" as const,
+              style: {
+                width: "15%",
+                align: "right",
+              },
+              header: "총",
+              unit: "억원",
+            },
+            {
+              name: "containerInland",
+              type: "input" as const,
+              style: {
+                width: "15%",
+                align: "right",
+              },
+              unit: "억원",
+            },
+          ],
+        },
+      },
+    ],
+  },
+];
+
+componentMapList.forEach((componentMap: contentMap, idx) => {
+  componentMap.idx = `${pageIdx}${idx + 1}`;
+});
+---
+
+<Layout pageTitle={pageTitle} prevButtonHref="/a" nextButtonHref="/c">
+  <h1>{pageTitle}</h1>
+
+  <form id="surveyForm">
+    {
+      componentMapList.map((componentMap) => (
+        <div class="intro">
+          <QuestionContainer client:load contentMap={componentMap} />
+        </div>
+      ))
+    }
+  </form>
+</Layout>

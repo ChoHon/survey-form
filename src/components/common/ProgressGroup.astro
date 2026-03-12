@@ -1,0 +1,39 @@
+---
+import ProgressButton from "./ProgressButton.astro";
+
+const {
+  prevButtonLabel = "이전",
+  nextButtonLabel = "다음",
+  prevButtonHref,
+  nextButtonHref,
+  nextButtonType = "next",
+} = Astro.props;
+
+const isSingleButton = nextButtonType === "single";
+---
+
+<div id="progress-group">
+  {
+    !isSingleButton && (
+      <ProgressButton
+        href={prevButtonHref}
+        type="prev"
+        label={prevButtonLabel}
+      />
+    )
+  }
+
+  <ProgressButton
+    href={nextButtonHref}
+    type={nextButtonType}
+    label={nextButtonLabel}
+  />
+</div>
+
+<style>
+  @import "tailwindcss";
+
+  div {
+    @apply mt-4 flex justify-center;
+  }
+</style>
