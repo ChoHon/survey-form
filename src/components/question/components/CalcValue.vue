@@ -9,7 +9,7 @@ interface Props {
 
 const { calcValue: config, name } = defineProps<Props>();
 
-const { style, computed: formula } = config;
+const { style, header, footer, computed: formula } = config;
 
 const inputValues = inject<Ref<Record<string, number>>>("inputValues");
 
@@ -38,7 +38,9 @@ const calculatedValue = computed(() => {
 </script>
 
 <template>
+  {{ header }}
   <span>{{ calculatedValue }}</span>
+  {{ footer }}
   <!-- <input type="hidden" :name="name" :value="calculatedValue" /> -->
 </template>
 
@@ -46,6 +48,6 @@ const calculatedValue = computed(() => {
 @import "tailwindcss";
 
 span {
-  @apply text-blue-500 font-bold;
+  @apply ml-2 text-blue-600 font-bold;
 }
 </style>

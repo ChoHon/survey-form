@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { inject, provide, ref, type Ref } from "vue";
 import type { contentMap } from "./interfaces";
 import QuestionContent from "./QuestionContent.vue";
 
@@ -19,6 +20,16 @@ contentMap.question?.forEach((question, subIdx) => {
 const title = showTitleIdx
   ? `${contentMap.idx}. ${contentMap.title}`
   : contentMap.title;
+
+const parentinputValues = inject<Ref<Record<string, number>> | null>(
+  "inputValues",
+  null,
+);
+const inputValues = parentinputValues || ref({});
+
+if (!parentinputValues) {
+  provide("inputValues", inputValues);
+}
 </script>
 
 <template>

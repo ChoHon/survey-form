@@ -18,7 +18,7 @@ const componentMapList: contentMap[] = [
         name: "employeeCount",
         content: {
           type: "text" as const,
-          text: "총 {0}명",
+          text: "{0}",
           components: [
             {
               name: "",
@@ -27,6 +27,8 @@ const componentMapList: contentMap[] = [
                 width: "20%",
                 align: "right",
               },
+              header: "총",
+              footer: "명",
             },
           ],
         },
@@ -41,7 +43,7 @@ const componentMapList: contentMap[] = [
             name: "containerVehicle",
             content: {
               type: "text" as const,
-              text: "{0} (직영 {1}, 위수탁(지입) {2} 대)",
+              text: "{0} {1} {2}",
               components: [
                 {
                   name: "total",
@@ -51,7 +53,7 @@ const componentMapList: contentMap[] = [
                     align: "right",
                   },
                   header: "총",
-                  unit: "대",
+                  footer: "대",
                 },
                 {
                   name: "direct",
@@ -60,12 +62,14 @@ const componentMapList: contentMap[] = [
                     width: "10%",
                     align: "right",
                   },
-                  unit: "대",
+                  header: "(직영 ",
+                  footer: "대,",
                 },
                 {
                   name: "consigned",
                   type: "calcValue" as const,
-                  style: {},
+                  header: "위수탁(지입)",
+                  footer: "대)",
                   computed: "{total} - {direct}",
                 },
               ],
@@ -87,7 +91,7 @@ const componentMapList: contentMap[] = [
                     align: "right",
                   },
                   header: "총",
-                  unit: "대",
+                  footer: "대",
                 },
               ],
             },
@@ -99,7 +103,7 @@ const componentMapList: contentMap[] = [
         name: "companyAnnualSales",
         content: {
           type: "text" as const,
-          text: "{0} (컨테이너 내륙운송부분 {1})",
+          text: "{0} {1}",
           components: [
             {
               name: "total",
@@ -109,7 +113,7 @@ const componentMapList: contentMap[] = [
                 align: "right",
               },
               header: "총",
-              unit: "억원",
+              footer: "억원",
             },
             {
               name: "containerInland",
@@ -118,7 +122,73 @@ const componentMapList: contentMap[] = [
                 width: "15%",
                 align: "right",
               },
-              unit: "억원",
+              header: "(컨테이너 내륙운송부분",
+              footer: "억원)",
+            },
+          ],
+        },
+      },
+    ],
+  },
+  {
+    title: "2024년 기준 귀사의 연간 컨테이너 운송량은 어떻게 되십니까?",
+    name: "containerVolume",
+    question: [
+      {
+        title: "① 전체",
+        showTitleIdx: false,
+        name: "total",
+        content: {
+          type: "text" as const,
+          text: "{0}",
+          components: [
+            {
+              name: "",
+              type: "input" as const,
+              style: {
+                width: "15%",
+                align: "right",
+              },
+              header: "총",
+              footer: "TEU",
+            },
+          ],
+        },
+      },
+      {
+        title: "② 수단별",
+        showTitleIdx: false,
+        name: "transportation",
+        content: {
+          type: "text" as const,
+          text: "{0} {1} {2}",
+          components: [
+            {
+              name: "road",
+              type: "input" as const,
+              style: {
+                width: "15%",
+                align: "right",
+              },
+              header: "도로",
+              footer: "TEU",
+            },
+            {
+              name: "rail",
+              type: "input" as const,
+              style: {
+                width: "15%",
+                align: "right",
+              },
+              header: "철도",
+              footer: "TEU",
+            },
+            {
+              name: "coastal",
+              type: "calcValue" as const,
+              header: "연안해운",
+              footer: "TEU",
+              computed: "{total} - {road} - {rail}",
             },
           ],
         },

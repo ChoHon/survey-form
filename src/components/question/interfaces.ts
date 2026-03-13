@@ -1,16 +1,15 @@
 export interface baseComponent {
   name: string;
   type: "input" | "calcValue";
-  style: {
+  style?: {
     width?: string;
     align?: "left" | "center" | "right";
   };
+  header?: string;
+  footer?: string;
 }
 
-export interface input extends baseComponent {
-  header?: string;
-  unit?: string;
-}
+export interface input extends baseComponent {}
 
 export interface calcValue extends baseComponent {
   computed?: string;

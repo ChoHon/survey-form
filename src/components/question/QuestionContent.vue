@@ -1,8 +1,7 @@
 <script setup lang="ts">
 import { renderTextContent } from "./functions";
-import TextInput from "./components/Input.vue";
+import Input from "./components/Input.vue";
 import type { content } from "./interfaces";
-import { ref, provide } from "vue";
 import CalcValue from "./components/CalcValue.vue";
 
 interface Props {
@@ -16,19 +15,13 @@ const { type, text, components } = content;
 let splited: any[] = [];
 
 if (type === "text") splited = renderTextContent(name, content);
-
-// 모든 input 값들을 저장하는 반응형 객체
-const inputValues = ref<Record<string, number>>({});
-
-// 자식 컴포넌트에서 접근할 수 있도록 provide
-provide("inputValues", inputValues);
 </script>
 
 <template>
   <div v-if="type === 'text'">
-    <template v-for="(item, idx) in splited" :key="idx">
+    <div v-for="(item, idx) in splited" :key="idx" class="content-container">
       <span v-if="typeof item === 'string'">{{ item }}</span>
-      <TextInput
+      <Input
         v-else-if="item.type === 'input'"
         :input="item"
         :name="item.name"
@@ -38,6 +31,14 @@ provide("inputValues", inputValues);
         :calcValue="item"
         :name="item.name"
       />
-    </template>
+    </div>
   </div>
 </template>
+
+<style scoped>
+@import "tailwindcss";
+
+.content-container {
+  @apply inline mr-5;
+}
+</style>

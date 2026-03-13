@@ -9,9 +9,9 @@ interface Props {
 
 const { input, name } = defineProps<Props>();
 
-const { style, header, unit } = input;
+const { style, header, footer } = input;
 
-const { width, align = "left", ...rest } = style;
+const { width = "100%", align = "left", ...rest } = style || {};
 
 const value = ref<string>("");
 
@@ -30,7 +30,7 @@ watch(value, (newValue) => {
 <template>
   {{ header }}
   <input :name="name" v-model="value" />
-  {{ unit }}
+  {{ footer }}
 </template>
 
 <style scoped>
@@ -39,6 +39,6 @@ watch(value, (newValue) => {
 input {
   width: v-bind(width);
   text-align: v-bind(align);
-  @apply h-[32px] bg-gray-100 px-2 text-base text-gray-900 border-b border-gray-500 focus:bg-red-100 focus:outline-none;
+  @apply h-[32px] bg-gray-100 ml-2 px-2 text-base text-gray-900 border-b border-gray-500 focus:bg-red-100 focus:outline-none;
 }
 </style>
