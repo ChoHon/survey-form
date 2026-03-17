@@ -48,4 +48,8 @@ td {
 td:has(input:focus) {
   @apply bg-red-100;
 }
+
+td:has(input) :deep(input) {
+  @apply border-0;
+}
 </style>

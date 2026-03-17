@@ -400,6 +400,175 @@ const componentMapList: contentMap[] = [
       },
     },
   },
+  {
+    title: "귀사의 운송거래 계약형태(계약기간)은 어떻게 되십니까?",
+    name: "contractDuration",
+    content: {
+      type: "table" as const,
+      table: {
+        rows: [
+          {
+            cells: [
+              {
+                content: {
+                  text: "구분",
+                },
+                style: {
+                  width: "75%",
+                },
+                colspan: 2,
+              },
+              {
+                content: {
+                  text: "거래 비중(운송량 기준)",
+                },
+              },
+            ],
+            isHeader: true,
+          },
+          {
+            cells: [
+              {
+                content: {
+                  text: "1",
+                },
+                style: {
+                  width: "5%",
+                },
+              },
+              {
+                content: {
+                  text: "장기 계약(1년 초과)",
+                },
+                style: {
+                  width: "70%",
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "overYearPercent",
+                      type: "input" as const,
+                      style: {
+                        width: "70%",
+                        align: "right",
+                      },
+                      footer: "%",
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            cells: [
+              {
+                content: {
+                  text: "2",
+                },
+              },
+              {
+                content: {
+                  text: "1년 단위 계약",
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "yearPercent",
+                      type: "input" as const,
+                      style: {
+                        width: "70%",
+                        align: "right",
+                      },
+                      footer: "%",
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            cells: [
+              {
+                content: {
+                  text: "3",
+                },
+              },
+              {
+                content: {
+                  text: "1년 미만(3~6개월) 계약",
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "underYearPercent",
+                      type: "input" as const,
+                      style: {
+                        width: "70%",
+                        align: "right",
+                      },
+                      footer: "%",
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            cells: [
+              {
+                content: {
+                  text: "4",
+                },
+              },
+              {
+                content: {
+                  text: "수시(건별) 계약",
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "shortTermPercent",
+                      type: "calcValue" as const,
+                      computed:
+                        "100 - {overYearPercent} - {yearPercent} - {underYearPercent}",
+                      footer: "%",
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            cells: [
+              {
+                content: {
+                  text: "합계",
+                },
+                colspan: 2,
+              },
+              {
+                content: {
+                  text: "100%",
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
 ];
 
 componentMapList.forEach((componentMap: contentMap, idx) => {
