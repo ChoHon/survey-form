@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { renderTextContent } from "./functions";
+import { renderTextContent } from "./scripts/functions";
 import Input from "./components/Input.vue";
-import type { content } from "./interfaces";
+import type { textContent } from "./interfaces";
 import CalcValue from "./components/CalcValue.vue";
 
 interface Props {
   name: string;
-  content: content;
+  content: textContent;
 }
 
 const { name, content } = defineProps<Props>();
@@ -19,7 +19,14 @@ if (type === "text") splited = renderTextContent(name, content);
 
 <template>
   <div v-if="type === 'text'">
-    <div v-for="(item, idx) in splited" :key="idx" class="content-container">
+    <div
+      v-for="(item, idx) in splited"
+      :key="idx"
+      :class="[
+        'content-container',
+        { 'mr-5': typeof item !== 'string' || item === '100%' },
+      ]"
+    >
       <span v-if="typeof item === 'string'">{{ item }}</span>
       <Input
         v-else-if="item.type === 'input'"
@@ -36,9 +43,9 @@ if (type === "text") splited = renderTextContent(name, content);
 </template>
 
 <style scoped>
-@import "tailwindcss";
+@reference "tailwindcss";
 
 .content-container {
-  @apply inline mr-5;
+  @apply inline;
 }
 </style>

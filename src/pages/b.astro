@@ -195,6 +195,211 @@ const componentMapList: contentMap[] = [
       },
     ],
   },
+  {
+    title: "귀사의 컨테이너 화주 고객사는 어떻게 구성되어 있습니까?",
+    name: "customerShipperStructure",
+    content: {
+      type: "table" as const,
+      table: {
+        rows: [
+          {
+            cells: [
+              {
+                content: {
+                  text: "구분",
+                },
+                style: {
+                  width: "50%",
+                },
+                colspan: 2,
+              },
+              {
+                content: {
+                  text: "업체수",
+                },
+                style: {
+                  width: "25%",
+                },
+              },
+              {
+                content: {
+                  text: "이용 운송량 비중",
+                },
+              },
+            ],
+            isHeader: true,
+          },
+          {
+            cells: [
+              {
+                content: {
+                  text: "1",
+                },
+                style: {
+                  width: "5%",
+                },
+              },
+              {
+                content: {
+                  text: "종사자수 9명 이하 규모 기업",
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "under9Count",
+                      type: "input" as const,
+                      style: {
+                        width: "70%",
+                        align: "right",
+                      },
+                      footer: "개",
+                    },
+                  ],
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "under9Percent",
+                      type: "input" as const,
+                      style: {
+                        width: "60%",
+                        align: "right",
+                      },
+                      footer: "%",
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            cells: [
+              {
+                content: {
+                  text: "2",
+                },
+              },
+              {
+                content: {
+                  text: "종사자수 10~99명 규모 기업",
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "under100Count",
+                      type: "input" as const,
+                      style: {
+                        width: "70%",
+                        align: "right",
+                      },
+                      footer: "개",
+                    },
+                  ],
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "under100Percent",
+                      type: "input" as const,
+                      style: {
+                        width: "60%",
+                        align: "right",
+                      },
+                      footer: "%",
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            cells: [
+              {
+                content: {
+                  text: "3",
+                },
+              },
+              {
+                content: {
+                  text: "종사자수 100명 이상 규모 기업",
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "over100Count",
+                      type: "input" as const,
+                      style: {
+                        width: "70%",
+                        align: "right",
+                      },
+                      footer: "개",
+                    },
+                  ],
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "over100Percent",
+                      type: "calcValue" as const,
+                      computed: "100 - {under9Percent} - {under100Percent}",
+                      footer: "%",
+                    },
+                  ],
+                },
+              },
+            ],
+          },
+          {
+            cells: [
+              {
+                content: {
+                  text: "합계",
+                },
+                colspan: 2,
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "totalCount",
+                      type: "calcValue" as const,
+                      computed:
+                        "{under9Count} + {under100Count} + {over100Count}",
+                      footer: "개",
+                    },
+                  ],
+                },
+              },
+              {
+                content: {
+                  text: "100%",
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
 ];
 
 componentMapList.forEach((componentMap: contentMap, idx) => {

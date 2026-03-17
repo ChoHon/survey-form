@@ -34,11 +34,11 @@ watch(value, (newValue) => {
 </template>
 
 <style scoped>
-@import "tailwindcss";
+@reference "tailwindcss";
 
 input {
   width: v-bind(width);
   text-align: v-bind(align);
-  @apply h-[32px] bg-gray-100 ml-2 px-2 text-base text-gray-900 border-b border-gray-500 focus:bg-red-100 focus:outline-none;
+  @apply h-[32px] bg-gray-200 ml-2 px-2 text-base text-gray-900 border-b border-gray-500 focus:bg-red-100 focus:outline-none;
 }
 </style>

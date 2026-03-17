@@ -45,7 +45,7 @@ const calculatedValue = computed(() => {
 </template>
 
 <style scoped>
-@import "tailwindcss";
+@reference "tailwindcss";
 
 span {
   @apply ml-2 text-blue-600 font-bold;

@@ -2,6 +2,7 @@
 import { inject, provide, ref, type Ref } from "vue";
 import type { contentMap } from "./interfaces";
 import QuestionContent from "./QuestionContent.vue";
+import Table from "./components/table/Table.vue";
 
 interface Props {
   isSub?: boolean;
@@ -42,16 +43,23 @@ if (!parentinputValues) {
       <QuestionContainer :isSub="true" :contentMap="question" />
     </div>
   </div>
+  <div v-else-if="contentMap.content?.type === 'table'" class="question-table">
+    <Table :config="contentMap.content.table" :name="contentMap.name"></Table>
+  </div>
   <div v-else class="question-content">
     <QuestionContent :content="contentMap.content" :name="contentMap.name" />
   </div>
 </template>
 
 <style scoped>
-@import "tailwindcss";
+@reference "tailwindcss";
 
 .question-container {
-  @apply my-5;
+  @apply mt-5;
+}
+
+.question-table {
+  @apply mt-5;
 }
 
 .question-content {

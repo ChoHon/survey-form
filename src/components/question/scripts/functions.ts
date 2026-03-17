@@ -1,8 +1,8 @@
-import type { content, input } from "./interfaces";
+import type { input, textContent } from "../interfaces";
 
 export function renderTextContent(
   name: string,
-  content: content,
+  content: textContent,
 ): (string | input)[] {
   const { type, text, components, ...rest } = content;
   const splited: (string | input)[] = [];
