@@ -569,6 +569,33 @@ const componentMapList: contentMap[] = [
       },
     },
   },
+  {
+    title:
+      "컨테이너 운송수단 선택에 귀사가 가지는 결정권의 수준은 어느정도입니까?",
+    name: "powerOfDecisionForTransportation",
+    content: {
+      type: "select",
+      options: [
+        {
+          label: "① 전적으로 운송수단 선택권을 가짐",
+        },
+        {
+          label:
+            "② 전반적으로 운송수단 선택권을 가지나 일부 화주사의 선호나 요청사항 반영",
+        },
+        {
+          label:
+            "③ 일부에 한해 운송수단 선택권을 가지며, 전반적으로 화주사가 운송수단을 선택",
+        },
+        {
+          label: "④ 전적으로 화주사가 운송수단 선택권을 가짐",
+        },
+        {
+          label: "⑤ 해당없음(단일 운송수단만 이용)",
+        },
+      ],
+    },
+  },
 ];
 
 componentMapList.forEach((componentMap: contentMap, idx) => {

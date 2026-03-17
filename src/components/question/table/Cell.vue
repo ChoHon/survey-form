@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import type { tableCell } from "../../interfaces";
-import QuestionContent from "../../QuestionContent.vue";
+import type { tableCell } from "../interfaces";
+import QuestionContent from "../QuestionContent.vue";
 
 interface Props {
   cell: tableCell;

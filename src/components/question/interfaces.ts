@@ -53,7 +53,17 @@ export interface tableContent {
   table: table;
 }
 
-export type content = textContent | tableContent;
+export interface option {
+  label: string;
+  value?: number;
+}
+
+export interface selectContent {
+  type: "select";
+  options: option[];
+}
+
+export type content = textContent | tableContent | selectContent;
 
 interface baseContentMap {
   idx?: string;

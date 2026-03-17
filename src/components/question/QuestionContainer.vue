@@ -2,7 +2,7 @@
 import { inject, provide, ref, type Ref } from "vue";
 import type { contentMap } from "./interfaces";
 import QuestionContent from "./QuestionContent.vue";
-import Table from "./components/table/Table.vue";
+import Table from "./table/Table.vue";
 
 interface Props {
   isSub?: boolean;

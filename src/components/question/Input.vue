@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { input } from "../interfaces";
+import type { input } from "./interfaces";
 import { ref, computed, inject, watch, type Ref } from "vue";
 
 interface Props {

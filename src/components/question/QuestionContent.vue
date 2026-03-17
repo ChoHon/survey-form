@@ -1,20 +1,38 @@
 <script setup lang="ts">
 import { renderTextContent } from "./scripts/functions";
-import Input from "./components/Input.vue";
-import type { textContent } from "./interfaces";
-import CalcValue from "./components/CalcValue.vue";
+import Input from "./Input.vue";
+import type { option, selectContent, textContent } from "./interfaces";
+import CalcValue from "./CalcValue.vue";
+import Select from "./Select.vue";
+import { generateId } from "../../scripts/functions";
 
 interface Props {
   name: string;
-  content: textContent;
+  content: textContent | selectContent;
 }
 
 const { name, content } = defineProps<Props>();
-const { type, text, components } = content;
 
+const { type } = content;
+
+// textContent인 경우에만 파싱
 let splited: any[] = [];
+if (type === "text") {
+  splited = renderTextContent(name, content as textContent);
+}
 
-if (type === "text") splited = renderTextContent(name, content);
+// selectContent인 경우 options 추출
+let options: option[] = [];
+let selectId = "";
+if (type === "select") {
+  options = (content as selectContent).options;
+
+  options.forEach((opt, idx) => {
+    opt["value"] = idx + 1;
+  });
+
+  selectId = generateId();
+}
 </script>
 
 <template>
@@ -39,6 +57,13 @@ if (type === "text") splited = renderTextContent(name, content);
         :name="item.name"
       />
     </div>
+  </div>
+  <div v-else-if="type === 'select'">
+    <template v-for="opt in options" :key="opt.value">
+      <Select :name="name" :value="opt.value ?? 0">
+        <template #label>{{ opt.label }}</template>
+      </Select>
+    </template>
   </div>
 </template>
 
