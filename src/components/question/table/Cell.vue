@@ -8,14 +8,9 @@ interface Props {
 }
 const { cell, name } = defineProps<Props>();
 const { content, style, colspan = 1, rowspan = 1 } = cell;
-const { width = "auto" } = style || {};
+let { width = "auto", align = "center", fullInput = true } = style || {};
 
 content["type"] = "text" as const;
-
-let align = undefined;
-if (content.components || content.text === "100%") {
-  align = "right";
-}
 
 const isInputCell = content.components?.[0]?.type === "input";
 </script>
@@ -24,7 +19,7 @@ const isInputCell = content.components?.[0]?.type === "input";
   <td
     :colspan="colspan > 1 ? colspan : undefined"
     :rowspan="rowspan > 1 ? rowspan : undefined"
-    :class="{ 'input-cell': isInputCell }"
+    :class="{ 'input-cell': isInputCell, 'full-input': fullInput }"
   >
     <QuestionContent :content="content" :name="name" />
   </td>
@@ -45,11 +40,11 @@ td {
 }
 
 /* input이 focus될 때 td 스타일 변경 */
-td:has(input:focus) {
+td.full-input:has(input:focus) {
   @apply bg-red-100;
 }
 
-td:has(input) :deep(input) {
+td.full-input:has(input) :deep(input) {
   @apply border-0;
 }
 </style>

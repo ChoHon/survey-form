@@ -24,6 +24,8 @@ export interface tableCell {
   content: textContent;
   style?: {
     width?: string;
+    align?: "left" | "center" | "right";
+    fullInput?: boolean;
   };
   colspan?: number;
   rowspan?: number;

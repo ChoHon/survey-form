@@ -1,6 +1,5 @@
 <script setup lang="ts">
-import type { table } from "../../interfaces";
-import { ref, computed, inject, watch, type Ref } from "vue";
+import type { table } from "../interfaces";
 import Row from "./Row.vue";
 
 interface Props {

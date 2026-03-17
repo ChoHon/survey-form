@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { tableRow } from "../../interfaces";
+import type { tableRow } from "../interfaces";
 import Cell from "./Cell.vue";
 
 interface Props {

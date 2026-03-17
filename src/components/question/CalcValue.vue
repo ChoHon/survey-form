@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, inject, type Ref } from "vue";
-import type { calcValue } from "../interfaces";
+import type { calcValue } from "./interfaces";
 
 interface Props {
   calcValue: calcValue;

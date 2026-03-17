@@ -259,6 +259,9 @@ const componentMapList: contentMap[] = [
                     },
                   ],
                 },
+                style: {
+                  align: "right",
+                },
               },
               {
                 content: {
@@ -274,6 +277,9 @@ const componentMapList: contentMap[] = [
                       footer: "%",
                     },
                   ],
+                },
+                style: {
+                  align: "right",
                 },
               },
             ],
@@ -305,6 +311,9 @@ const componentMapList: contentMap[] = [
                     },
                   ],
                 },
+                style: {
+                  align: "right",
+                },
               },
               {
                 content: {
@@ -320,6 +329,9 @@ const componentMapList: contentMap[] = [
                       footer: "%",
                     },
                   ],
+                },
+                style: {
+                  align: "right",
                 },
               },
             ],
@@ -351,6 +363,9 @@ const componentMapList: contentMap[] = [
                     },
                   ],
                 },
+                style: {
+                  align: "right",
+                },
               },
               {
                 content: {
@@ -363,6 +378,9 @@ const componentMapList: contentMap[] = [
                       footer: "%",
                     },
                   ],
+                },
+                style: {
+                  align: "right",
                 },
               },
             ],
@@ -388,10 +406,16 @@ const componentMapList: contentMap[] = [
                     },
                   ],
                 },
+                style: {
+                  align: "right",
+                },
               },
               {
                 content: {
                   text: "100%",
+                },
+                style: {
+                  align: "right",
                 },
               },
             ],
@@ -459,6 +483,9 @@ const componentMapList: contentMap[] = [
                     },
                   ],
                 },
+                style: {
+                  align: "right",
+                },
               },
             ],
           },
@@ -488,6 +515,9 @@ const componentMapList: contentMap[] = [
                       footer: "%",
                     },
                   ],
+                },
+                style: {
+                  align: "right",
                 },
               },
             ],
@@ -519,6 +549,9 @@ const componentMapList: contentMap[] = [
                     },
                   ],
                 },
+                style: {
+                  align: "right",
+                },
               },
             ],
           },
@@ -547,6 +580,9 @@ const componentMapList: contentMap[] = [
                     },
                   ],
                 },
+                style: {
+                  align: "right",
+                },
               },
             ],
           },
@@ -561,6 +597,9 @@ const componentMapList: contentMap[] = [
               {
                 content: {
                   text: "100%",
+                },
+                style: {
+                  align: "right",
                 },
               },
             ],
@@ -594,6 +633,179 @@ const componentMapList: contentMap[] = [
           label: "⑤ 해당없음(단일 운송수단만 이용)",
         },
       ],
+    },
+  },
+  {
+    title:
+      "컨테이너 화물을 국내 목적지(항만 또는 화주 문전)까지 운송을 완료하는 데까지 요구되는 시간은 어느 정도입니까?",
+    name: "requiredTimeForTransportation",
+    content: {
+      type: "table" as const,
+      table: {
+        rows: [
+          {
+            cells: [
+              {
+                content: {
+                  text: "당일",
+                },
+                style: {
+                  width: "20%",
+                },
+              },
+              {
+                content: {
+                  text: "익일",
+                },
+                style: {
+                  width: "20%",
+                },
+              },
+              {
+                content: {
+                  text: "일주일 내",
+                },
+                style: {
+                  width: "20%",
+                },
+              },
+              {
+                content: {
+                  text: "일주일 이상",
+                },
+                style: {
+                  width: "20%",
+                },
+              },
+              {
+                content: {
+                  text: "합계",
+                },
+              },
+            ],
+            isHeader: true,
+          },
+          {
+            cells: [
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "sameDay",
+                      type: "input" as const,
+                      style: {
+                        width: "70%",
+                        align: "right",
+                      },
+                      footer: "%",
+                    },
+                  ],
+                },
+                style: {
+                  align: "right",
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "nextDay",
+                      type: "input" as const,
+                      style: {
+                        width: "70%",
+                        align: "right",
+                      },
+                      footer: "%",
+                    },
+                  ],
+                },
+                style: {
+                  align: "right",
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "withinAWeek",
+                      type: "input" as const,
+                      style: {
+                        width: "70%",
+                        align: "right",
+                      },
+                      footer: "%",
+                    },
+                  ],
+                },
+                style: {
+                  align: "right",
+                },
+              },
+              {
+                content: {
+                  text: "{0}",
+                  components: [
+                    {
+                      name: "totalCount",
+                      type: "calcValue" as const,
+                      computed: "100 - {sameDay} - {nextDay} - {withinAWeek}",
+                      footer: "%",
+                    },
+                  ],
+                },
+                style: {
+                  align: "right",
+                },
+              },
+              {
+                content: {
+                  text: "100%",
+                },
+                style: {
+                  align: "right",
+                },
+              },
+            ],
+          },
+          {
+            cells: [
+              {
+                content: {
+                  text: "평균 {0} {1}",
+                  components: [
+                    {
+                      name: "requiredTimeForTransportationDay",
+                      type: "input" as const,
+                      style: {
+                        width: "10%",
+                        align: "right",
+                      },
+                      footer: "일",
+                    },
+                    {
+                      name: "requiredTimeForTransportationHour",
+                      type: "input" as const,
+                      style: {
+                        width: "10%",
+                        align: "right",
+                      },
+                      footer: "시간",
+                    },
+                  ],
+                },
+                colspan: 5,
+                style: {
+                  align: "center",
+                  fullInput: false,
+                },
+              },
+            ],
+          },
+        ],
+      },
     },
   },
 ];
