@@ -1,6 +1,6 @@
 export interface baseComponent {
   name: string;
-  type: "input" | "calcValue";
+  type: "input" | "calcValue" | "dropdown";
   style?: {
     width?: string;
     align?: "left" | "center" | "right";
@@ -21,7 +21,7 @@ export interface calcValue extends baseComponent {
 
 // 테이블 셀 정의
 export interface tableCell {
-  content: textContent;
+  content: textContent | dropdownContent;
   style?: {
     width?: string;
     align?: "left" | "center" | "right";
@@ -29,13 +29,21 @@ export interface tableCell {
   };
   colspan?: number;
   rowspan?: number;
+  isHeader?: boolean;
+}
+
+export interface divider {
+  type: "divider";
 }
 
 // 테이블 행 정의
-export interface tableRow {
+export interface tableRowContent {
+  type?: "content";
   cells: tableCell[];
   isHeader?: boolean;
 }
+
+export type tableRow = tableRowContent | divider;
 
 // 테이블 정의
 export interface table {
@@ -65,13 +73,37 @@ export interface selectContent {
   options: option[];
 }
 
-export type content = textContent | tableContent | selectContent;
+export interface dropdownContent {
+  type: "dropdown";
+  name: string;
+  category: "address";
+}
+
+export type content =
+  | textContent
+  | tableContent
+  | selectContent
+  | dropdownContent;
+
+export interface textSegment {
+  content: string;
+  style?: {
+    color?: string;
+    bold?: boolean;
+    underline?: boolean;
+  };
+}
+
+interface titleConfig {
+  showIdx?: boolean;
+}
 
 interface baseContentMap {
   idx?: string;
-  name: string;
   title: string;
-  showTitleIdx?: boolean;
+  titleConfig?: titleConfig;
+  name: string;
+  description?: textSegment[];
 }
 
 interface contentMapSingle extends baseContentMap {

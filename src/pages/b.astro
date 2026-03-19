@@ -39,7 +39,9 @@ const componentMapList: contentMap[] = [
         question: [
           {
             title: "① 컨테이너 운송차량",
-            showTitleIdx: false,
+            titleConfig: {
+              showIdx: false,
+            },
             name: "containerVehicle",
             content: {
               type: "text" as const,
@@ -77,7 +79,9 @@ const componentMapList: contentMap[] = [
           },
           {
             title: "② 사유화차",
-            showTitleIdx: false,
+            titleConfig: {
+              showIdx: false,
+            },
             name: "privateVehicle",
             content: {
               type: "text" as const,
@@ -136,7 +140,9 @@ const componentMapList: contentMap[] = [
     question: [
       {
         title: "① 전체",
-        showTitleIdx: false,
+        titleConfig: {
+          showIdx: false,
+        },
         name: "total",
         content: {
           type: "text" as const,
@@ -157,7 +163,9 @@ const componentMapList: contentMap[] = [
       },
       {
         title: "② 수단별",
-        showTitleIdx: false,
+        titleConfig: {
+          showIdx: false,
+        },
         name: "transportation",
         content: {
           type: "text" as const,
@@ -807,6 +815,407 @@ const componentMapList: contentMap[] = [
         ],
       },
     },
+  },
+  {
+    title:
+      "단거리 셔틀운송을 제외하고, 귀사가 가장 많은 컨테이너를 운송하는 대표운송구간이 어떻게 되십니까?(시군구 기준)",
+    name: "transportSection",
+    description: [
+      {
+        content:
+          "단, 귀사가 철도를 이용중이라면 철도물동량이 가장 많은 구간을 기준으로 응답",
+        style: {
+          color: "red",
+          underline: true,
+        },
+      },
+      {
+        content:
+          "해주시기 바라며, 동일 구간의 도로운송현황도 응답해주시기 바랍니다. 철도를 전혀 이용하지 않는다면 도로운송에 한해서 응답해주시기 바랍니다.",
+      },
+    ],
+    question: [
+      {
+        title: "",
+        name: "",
+        content: {
+          type: "table" as const,
+          table: {
+            rows: [
+              {
+                cells: [
+                  {
+                    content: {
+                      text: "내륙 기종점",
+                    },
+                    style: {
+                      width: "22%",
+                    },
+                    colspan: 2,
+                    isHeader: true,
+                  },
+                  {
+                    content: {
+                      type: "dropdown" as const,
+                      name: "inland",
+                      category: "address",
+                    },
+                    style: {
+                      width: "44%",
+                    },
+                    colspan: 2,
+                  },
+                  {
+                    content: {
+                      text: "{0}",
+                      components: [
+                        {
+                          name: "inland.point",
+                          type: "input" as const,
+                          style: {
+                            width: "40%",
+                            align: "center",
+                          },
+                          header: "(대표지점:",
+                          footer: ")",
+                        },
+                      ],
+                    },
+                    style: {
+                      fullInput: false,
+                    },
+                  },
+                ],
+              },
+              {
+                type: "divider" as const,
+              },
+              {
+                cells: [
+                  {
+                    content: {
+                      text: "철도 경유지",
+                    },
+                    colspan: 2,
+                  },
+                  {
+                    content: {
+                      text: "도로 경유지 (*이용시)",
+                    },
+                    colspan: 3,
+                  },
+                ],
+                isHeader: true,
+              },
+              {
+                cells: [
+                  {
+                    content: {
+                      text: "화물역1",
+                    },
+                    style: {
+                      width: "9%",
+                    },
+                  },
+                  {
+                    content: {
+                      text: "{0}",
+                      components: [
+                        {
+                          name: "rail.inter1",
+                          type: "input" as const,
+                          style: {
+                            width: "90%",
+                            align: "right",
+                          },
+                        },
+                      ],
+                    },
+                    style: {
+                      width: "13%",
+                    },
+                  },
+                  {
+                    content: {
+                      text: "경유지 주소",
+                    },
+                    style: {
+                      width: "12%",
+                    },
+                  },
+                  {
+                    content: {
+                      type: "dropdown" as const,
+                      name: "road.inter",
+                      category: "address",
+                    },
+                    colspan: 2,
+                  },
+                ],
+              },
+              {
+                cells: [
+                  {
+                    content: {
+                      text: "화물역2",
+                    },
+                    style: {
+                      width: "9%",
+                    },
+                  },
+                  {
+                    content: {
+                      text: "{0}",
+                      components: [
+                        {
+                          name: "rail.inter2",
+                          type: "input" as const,
+                          style: {
+                            width: "90%",
+                            align: "right",
+                          },
+                        },
+                      ],
+                    },
+                    style: {
+                      width: "13%",
+                    },
+                  },
+                  {
+                    content: {
+                      text: "경유지명",
+                    },
+                    style: {
+                      width: "12%",
+                    },
+                  },
+                  {
+                    content: {
+                      text: "{0}",
+                      components: [
+                        {
+                          name: "road.inter.point",
+                          type: "input" as const,
+                          style: {
+                            width: "90%",
+                            align: "center",
+                          },
+                        },
+                      ],
+                    },
+                    colspan: 2,
+                  },
+                ],
+              },
+              {
+                type: "divider" as const,
+              },
+              {
+                cells: [
+                  {
+                    content: {
+                      text: "항만 기종점",
+                    },
+                    style: {
+                      width: "22%",
+                    },
+                    colspan: 2,
+                    isHeader: true,
+                  },
+                  {
+                    content: {
+                      type: "dropdown" as const,
+                      name: "port",
+                      category: "address",
+                    },
+                    style: {
+                      width: "44%",
+                    },
+                    colspan: 2,
+                  },
+                  {
+                    content: {
+                      text: "{0}",
+                      components: [
+                        {
+                          name: "port.point",
+                          type: "input" as const,
+                          style: {
+                            width: "40%",
+                            align: "center",
+                          },
+                          header: "(대표지점:",
+                          footer: ")",
+                        },
+                      ],
+                    },
+                    style: {
+                      fullInput: false,
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      },
+      {
+        title: "",
+        name: "",
+        content: {
+          type: "table" as const,
+          table: {
+            rows: [
+              {
+                cells: [
+                  {
+                    content: {
+                      text: "연간 운송량",
+                    },
+                    style: {
+                      width: "14%",
+                    },
+                    isHeader: true,
+                    rowspan: 3,
+                  },
+                  {
+                    content: {
+                      text: "합계",
+                    },
+                    style: {
+                      width: "8%",
+                    },
+                    isHeader: true,
+                  },
+                  {
+                    content: {
+                      text: "{0}",
+                      components: [
+                        {
+                          name: "total",
+                          type: "input" as const,
+                          style: {
+                            width: "60%",
+                            align: "right",
+                          },
+                          header: "총",
+                          footer: "TEU",
+                        },
+                      ],
+                    },
+                    style: {
+                      align: "right",
+                      fullInput: false,
+                    },
+                    colspan: 2,
+                  },
+                ],
+              },
+              {
+                cells: [
+                  {
+                    content: {
+                      text: "수단별",
+                    },
+                    isHeader: true,
+                  },
+                  {
+                    content: {
+                      text: "{0}",
+                      components: [
+                        {
+                          name: "rail",
+                          type: "input" as const,
+                          style: {
+                            width: "60%",
+                            align: "right",
+                          },
+                          header: "철도",
+                          footer: "TEU",
+                        },
+                      ],
+                    },
+                    style: {
+                      width: "45%",
+                      align: "right",
+                      fullInput: false,
+                    },
+                  },
+                  {
+                    content: {
+                      text: "{0}",
+                      components: [
+                        {
+                          name: "road",
+                          type: "calcValue" as const,
+                          header: "수입",
+                          footer: "TEU",
+                          computed: "{total} - {rail}",
+                        },
+                      ],
+                    },
+                    style: {
+                      width: "35%",
+                      align: "right",
+                    },
+                  },
+                ],
+              },
+              {
+                cells: [
+                  {
+                    content: {
+                      text: "방향별",
+                    },
+                    isHeader: true,
+                  },
+                  {
+                    content: {
+                      text: "{0}",
+                      components: [
+                        {
+                          name: "export",
+                          type: "input" as const,
+                          style: {
+                            width: "60%",
+                            align: "right",
+                          },
+                          header: "수출",
+                          footer: "TEU",
+                        },
+                      ],
+                    },
+                    style: {
+                      width: "45%",
+                      align: "right",
+                      fullInput: false,
+                    },
+                  },
+                  {
+                    content: {
+                      text: "{0}",
+                      components: [
+                        {
+                          name: "import",
+                          type: "calcValue" as const,
+                          header: "수입",
+                          footer: "TEU",
+                          computed: "{total} - {export}",
+                        },
+                      ],
+                    },
+                    style: {
+                      width: "35%",
+                      align: "right",
+                    },
+                  },
+                ],
+              },
+            ],
+          },
+        },
+      },
+    ],
   },
 ];
 

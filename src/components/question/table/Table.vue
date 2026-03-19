@@ -14,7 +14,9 @@ const { rows } = config;
 
 <template>
   <table>
-    <Row v-for="(row, rowIdx) in rows" :key="rowIdx" :row="row" :name="name" />
+    <template v-for="(row, rowIdx) in rows" :key="rowIdx">
+      <Row :row="row" :name="name" />
+    </template>
   </table>
 </template>
 

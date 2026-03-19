@@ -1,14 +1,20 @@
 <script setup lang="ts">
 import { renderTextContent } from "./scripts/functions";
 import Input from "./Input.vue";
-import type { option, selectContent, textContent } from "./interfaces";
+import type {
+  dropdownContent,
+  option,
+  selectContent,
+  textContent,
+} from "./interfaces";
 import CalcValue from "./CalcValue.vue";
 import Select from "./Select.vue";
 import { generateId } from "../../scripts/functions";
+import Dropdown from "./dropdown/Dropdown.vue";
 
 interface Props {
   name: string;
-  content: textContent | selectContent;
+  content: textContent | selectContent | dropdownContent;
 }
 
 const { name, content } = defineProps<Props>();
@@ -32,6 +38,12 @@ if (type === "select") {
   });
 
   selectId = generateId();
+}
+
+//
+let category = "";
+if (type === "dropdown") {
+  category = (content as dropdownContent).category;
 }
 </script>
 
@@ -64,6 +76,9 @@ if (type === "select") {
         <template #label>{{ opt.label }}</template>
       </Select>
     </template>
+  </div>
+  <div v-else-if="type === 'dropdown'">
+    <Dropdown :category="category" />
   </div>
 </template>
 

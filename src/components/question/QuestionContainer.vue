@@ -3,6 +3,8 @@ import { inject, provide, ref, type Ref } from "vue";
 import type { contentMap } from "./interfaces";
 import QuestionContent from "./QuestionContent.vue";
 import Table from "./table/Table.vue";
+import TextSegment from "./TextSegment.vue";
+import Dropdown from "./dropdown/Dropdown.vue";
 
 interface Props {
   isSub?: boolean;
@@ -11,16 +13,16 @@ interface Props {
 
 const { contentMap, isSub = false } = defineProps<Props>();
 
-const { showTitleIdx = true, ...rest } = contentMap;
+const { title: titleText, titleConfig, description, ...rest } = contentMap;
+
+const { showIdx = true } = titleConfig || {};
 
 contentMap.question?.forEach((question, subIdx) => {
   question.idx = `${contentMap.idx}-${subIdx + 1}`;
   question.name = `${contentMap.name}.${question.name}`;
 });
 
-const title = showTitleIdx
-  ? `${contentMap.idx}. ${contentMap.title}`
-  : contentMap.title;
+const title = titleText ? `${showIdx ? contentMap.idx : ""} ${titleText}` : "";
 
 const parentinputValues = inject<Ref<Record<string, number>> | null>(
   "inputValues",
@@ -34,9 +36,15 @@ if (!parentinputValues) {
 </script>
 
 <template>
-  <component :is="isSub ? 'p' : 'h2'">
+  <component v-if="title" :is="isSub ? 'p' : 'h2'">
     {{ title }}
   </component>
+
+  <div v-if="description" class="question-container">
+    <template v-for="(seg, idx) in description" :key="idx">
+      <TextSegment :segment="seg" />
+    </template>
+  </div>
 
   <div v-if="contentMap.question">
     <div v-for="question in contentMap.question" class="question-container">

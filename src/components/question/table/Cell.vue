@@ -7,19 +7,30 @@ interface Props {
   name: string;
 }
 const { cell, name } = defineProps<Props>();
-const { content, style, colspan = 1, rowspan = 1 } = cell;
+const { content, style, colspan = 1, rowspan = 1, isHeader = false } = cell;
 let { width = "auto", align = "center", fullInput = true } = style || {};
 
-content["type"] = "text" as const;
+content.type = content.type ? content.type : "text";
 
-const isInputCell = content.components?.[0]?.type === "input";
+let isInputCell = false;
+if (content.type === "text" && content.components) {
+  isInputCell = content.components.some(
+    (component) => component.type === "input",
+  );
+} else if (content.type === "dropdown") {
+  isInputCell = true;
+}
 </script>
 
 <template>
   <td
     :colspan="colspan > 1 ? colspan : undefined"
     :rowspan="rowspan > 1 ? rowspan : undefined"
-    :class="{ 'input-cell': isInputCell, 'full-input': fullInput }"
+    :class="{
+      'input-cell': isInputCell,
+      'full-input': fullInput,
+      header: isHeader,
+    }"
   >
     <QuestionContent :content="content" :name="name" />
   </td>
@@ -32,6 +43,10 @@ td {
   width: v-bind(width);
   text-align: v-bind(align);
   @apply border;
+}
+
+td.header {
+  @apply bg-gray-400;
 }
 
 .input-cell {

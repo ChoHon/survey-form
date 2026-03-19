@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { tableRow } from "../interfaces";
+import type { tableCell, tableRow } from "../interfaces";
 import Cell from "./Cell.vue";
 
 interface Props {
@@ -8,30 +8,46 @@ interface Props {
 }
 const { row, name } = defineProps<Props>();
 
-const { cells, isHeader = false } = row;
+if (!("type" in row)) row.type = "content";
+
+let cells: tableCell[];
+let isHeader: boolean;
+
+if (row.type === "content") {
+  cells = row.cells || [];
+  isHeader = row.isHeader || false;
+}
 </script>
 
 <template>
-  <component :is="isHeader ? 'thead' : 'tr'">
+  <tr :class="[row.type, { header: isHeader }]">
     <Cell
+      v-if="row.type === 'content'"
       v-for="(cell, cellIdx) in cells"
       :key="cellIdx"
       :cell="cell"
       :name="name"
     />
-  </component>
+    <td v-else colspan="100">↕</td>
+  </tr>
 </template>
 
 <style scoped>
 @reference "tailwindcss";
 
-thead {
+tr {
   height: 36px;
+}
+
+tr.header {
   @apply border bg-gray-400;
 }
 
-tr {
-  height: 36px;
+tr.content {
   @apply border;
+}
+
+tr.divider {
+  @apply border-0;
 }
 </style>
